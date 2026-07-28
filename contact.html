@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — Saurabh Vishwakarma</title>
+    <style>
+      :root {
+        --font-primary:
+          ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+          "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        --mono:
+          "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+        --fs-xs: 14px;
+        --fs-sm: 15px;
+        --fs-md: 16px;
+        --fs-lg: 18px;
+        --fs-xl: 20px;
+        --fs-2xl: 24px;
+        --fs-3xl: 30px;
+        --text-primary: #f2f2f2;
+        --text-secondary: #ffffff;
+        --text-tertiary: #a1a1aa;
+        --text-inverse: #22c55e;
+        --surface-base: #000000;
+        --surface-muted: rgba(12, 10, 9, 0.7);
+        --border-default: #27272a;
+        --border-strong: #1f2937;
+        --sp-1: 8px;
+        --sp-2: 12px;
+        --sp-3: 16px;
+        --sp-4: 18px;
+        --sp-5: 20px;
+        --sp-6: 24px;
+        --sp-7: 28px;
+        --sp-8: 32px;
+        --r-sm: 6px;
+        --r-md: 8px;
+        --r-lg: 16px;
+        --r-xl: 9999px;
+        --shadow-2: rgba(0, 0, 0, 0.4) 0px 10px 30px -8px;
+        --dur-instant: 150ms;
+        --dur-fast: 200ms;
+        --dur-normal: 300ms;
+        --dur-slow: 500ms;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--surface-base);
+        color: var(--text-primary);
+        font-family: var(--font-primary);
+        font-size: var(--fs-md);
+        line-height: 24px;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        * {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+      }
+      :focus-visible {
+        outline: 2px solid var(--text-inverse);
+        outline-offset: 2px;
+        border-radius: var(--r-sm);
+      }
+      .wrap {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 var(--sp-6);
+        position: relative;
+        z-index: 2;
+      }
+
+      #bg-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+      }
+      .bg-fade {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background: radial-gradient(
+          ellipse at 50% 0%,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.55) 60%,
+          rgba(0, 0, 0, 0.92) 100%
+        );
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-default);
+      }
+      nav.wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 72px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-2);
+        font-family: var(--mono);
+        font-size: var(--fs-md);
+        font-weight: 600;
+        color: var(--text-secondary);
+      }
+      .logo .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--text-inverse);
+        box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+      }
+      .nav-links {
+        display: flex;
+        gap: var(--sp-6);
+        font-size: var(--fs-sm);
+        color: var(--text-tertiary);
+      }
+      .nav-links a {
+        transition: color var(--dur-fast) ease;
+      }
+      .nav-links a:hover {
+        color: var(--text-primary);
+      }
+      .nav-links a.active {
+        color: var(--text-inverse);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--sp-1);
+        font-size: var(--fs-sm);
+        font-weight: 500;
+        padding: var(--sp-2) var(--sp-4);
+        border-radius: var(--r-sm);
+        border: 1px solid var(--border-default);
+        transition: all var(--dur-fast) ease;
+        white-space: nowrap;
+      }
+      .btn:hover {
+        border-color: var(--border-strong);
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .btn:active {
+        transform: scale(0.98);
+      }
+      .btn-primary {
+        background: var(--text-inverse);
+        color: #04140a;
+        border-color: var(--text-inverse);
+        font-weight: 600;
+      }
+      .btn-primary:hover {
+        background: #16a34a;
+        border-color: #16a34a;
+      }
+
+      .page-hero {
+        min-height: 40vh;
+        display: flex;
+        align-items: center;
+        padding: 64px 0 24px;
+      }
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: var(--fs-xs);
+        color: var(--text-inverse);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: var(--sp-5);
+        opacity: 0;
+        animation: rise var(--dur-slow) ease forwards;
+        animation-delay: 0.1s;
+      }
+      .page-title {
+        font-size: 60px;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+        color: var(--text-secondary);
+        font-weight: 700;
+        margin-bottom: var(--sp-5);
+        opacity: 0;
+        animation: rise var(--dur-slow) ease forwards;
+        animation-delay: 0.25s;
+      }
+      .page-lede {
+        font-size: var(--fs-xl);
+        color: var(--text-tertiary);
+        max-width: 56ch;
+        line-height: 1.6;
+        opacity: 0;
+        animation: rise var(--dur-slow) ease forwards;
+        animation-delay: 0.4s;
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      section {
+        padding: 24px 0 96px;
+      }
+      .glass {
+        background: var(--surface-muted);
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--border-default);
+        border-radius: var(--r-lg);
+        box-shadow: var(--shadow-2);
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--sp-8);
+        align-items: start;
+      }
+      .contact-form {
+        padding: var(--sp-7);
+      }
+      .field-label {
+        display: block;
+        font-size: var(--fs-xs);
+        color: var(--text-tertiary);
+        margin-bottom: var(--sp-2);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      input[type="email"],
+      input[type="text"],
+      textarea {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border-default);
+        color: var(--text-primary);
+        font-family: inherit;
+        font-size: var(--fs-md);
+        padding: var(--sp-3) var(--sp-4);
+        border-radius: var(--r-sm);
+        transition: border-color var(--dur-fast) ease;
+        margin-bottom: var(--sp-4);
+      }
+      textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+      input::placeholder,
+      textarea::placeholder {
+        color: var(--text-tertiary);
+      }
+      input:hover,
+      textarea:hover {
+        border-color: var(--border-strong);
+      }
+      input:focus-visible,
+      textarea:focus-visible {
+        border-color: var(--text-inverse);
+      }
+      .field-error {
+        color: #f87171;
+        font-size: var(--fs-xs);
+        margin-top: -12px;
+        margin-bottom: var(--sp-4);
+        display: none;
+      }
+      .field-error.show {
+        display: block;
+      }
+      .contact-form .btn {
+        margin-top: var(--sp-2);
+        width: 100%;
+        justify-content: center;
+      }
+      .form-status {
+        font-size: var(--fs-xs);
+        color: var(--text-inverse);
+        margin-top: var(--sp-3);
+        display: none;
+      }
+      .form-status.show {
+        display: block;
+      }
+
+      .direct-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--sp-3);
+      }
+      .direct-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--sp-5);
+        border-radius: var(--r-sm);
+        transition: border-color var(--dur-fast) ease;
+      }
+      .direct-item:hover {
+        border-color: var(--text-inverse);
+      }
+      .direct-label {
+        font-size: var(--fs-xs);
+        color: var(--text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .direct-value {
+        font-size: var(--fs-sm);
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+
+      .avail-banner {
+        margin-bottom: var(--sp-6);
+        padding: var(--sp-4) var(--sp-5);
+        display: flex;
+        align-items: center;
+        gap: var(--sp-3);
+        font-family: var(--mono);
+        font-size: var(--fs-xs);
+        color: var(--text-inverse);
+        background: rgba(34, 197, 94, 0.06);
+        border: 1px solid rgba(34, 197, 94, 0.25);
+        border-radius: var(--r-sm);
+      }
+      .avail-banner .pulse-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--text-inverse);
+        animation: pulse 1.8s ease-in-out infinite;
+        flex-shrink: 0;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      @media (max-width: 860px) {
+        .page-title {
+          font-size: 36px;
+        }
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+        .nav-links {
+          display: none;
+        }
+      }
+
+      footer {
+        padding: var(--sp-8) 0;
+        border-top: 1px solid var(--border-default);
+        position: relative;
+        z-index: 2;
+      }
+      .footer-grid {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--sp-4);
+      }
+      .footer-note {
+        color: var(--text-tertiary);
+        font-size: var(--fs-xs);
+      }
+      .footer-links {
+        display: flex;
+        gap: var(--sp-5);
+      }
+      .footer-links a {
+        font-size: var(--fs-xs);
+        color: var(--text-tertiary);
+        transition: color var(--dur-fast) ease;
+      }
+      .footer-links a:hover {
+        color: var(--text-inverse);
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="bg-canvas"></canvas>
+    <div class="bg-fade"></div>
+
+    <header>
+      <nav class="wrap">
+        <a href="index.html" class="logo"
+          ><span class="dot"></span>Saurabh.dev</a
+        >
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html" class="active">Contact</a>
+        </div>
+        <a class="btn btn-primary" href="mailto:saurabhvk24@gmail.com"
+          >Ask me</a
+        >
+      </nav>
+    </header>
+
+    <main>
+      <div class="page-hero wrap">
+        <div>
+          <span class="eyebrow">Get in touch</span>
+          <h1 class="page-title">Contact</h1>
+          <p class="page-lede">
+            Open to Full Stack Developer roles and freelance builds. Reach out
+            directly, or leave your email and I'll get back to you.
+          </p>
+        </div>
+      </div>
+
+      <section>
+        <div class="wrap">
+          <div class="avail-banner">
+            <span class="pulse-dot"></span> Currently open to Full Stack
+            Developer roles
+          </div>
+          <div class="contact-grid">
+            <div class="glass contact-form">
+              <form id="contactForm" novalidate>
+                <label class="field-label" for="name">Your name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Full name"
+                  required
+                />
+
+                <label class="field-label" for="email">Your email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  required
+                  aria-describedby="emailError"
+                />
+                <p class="field-error" id="emailError">
+                  Enter a valid email address.
+                </p>
+
+                <label class="field-label" for="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="What are you looking to build or discuss?"
+                  required
+                ></textarea>
+
+                <button class="btn btn-primary" type="submit" id="submitBtn">
+                  Send message
+                </button>
+                <p class="form-status" id="formStatus">
+                  Thanks — I'll get back to you soon.
+                </p>
+              </form>
+            </div>
+            <div class="direct-list">
+              <a class="direct-item glass" href="mailto:saurabhvk24@gmail.com">
+                <span class="direct-label">Email</span>
+                <span class="direct-value">saurabhvk24@gmail.com</span>
+              </a>
+              <a class="direct-item glass" href="tel:+919026755863">
+                <span class="direct-label">Phone</span>
+                <span class="direct-value">+91 90267 55863</span>
+              </a>
+              <a
+                class="direct-item glass"
+                href="https://github.com/SaurabhVishwakarma000"
+                target="_blank"
+                rel="noopener"
+              >
+                <span class="direct-label">GitHub</span>
+                <span class="direct-value">SaurabhVishwakarma000</span>
+              </a>
+              <a
+                class="direct-item glass"
+                href="https://www.linkedin.com/in/saurabh-vishwakarma-72304a415"
+                target="_blank"
+                rel="noopener"
+              >
+                <span class="direct-label">LinkedIn</span>
+                <span class="direct-value">saurabh-vishwakarma</span>
+              </a>
+              <div class="direct-item glass">
+                <span class="direct-label">Based in</span>
+                <span class="direct-value">Lucknow, India</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap footer-grid">
+        <span class="footer-note"
+          >© 2026 Saurabh Vishwakarma. Built with intent.</span
+        >
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a
+            href="https://github.com/SaurabhVishwakarma000"
+            target="_blank"
+            rel="noopener"
+            >GitHub</a
+          >
+          <a
+            href="https://www.linkedin.com/in/saurabh-vishwakarma-72304a415"
+            target="_blank"
+            rel="noopener"
+            >LinkedIn</a
+          >
+          <a href="mailto:saurabhvk24@gmail.com">Email</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      const form = document.getElementById("contactForm");
+      const emailInput = document.getElementById("email");
+      const emailError = document.getElementById("emailError");
+      const submitBtn = document.getElementById("submitBtn");
+      const formStatus = document.getElementById("formStatus");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!emailInput.checkValidity()) {
+          emailError.classList.add("show");
+          emailInput.focus();
+          return;
+        }
+        emailError.classList.remove("show");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending…";
+        setTimeout(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Send message";
+          formStatus.classList.add("show");
+          form.reset();
+        }, 900);
+      });
+      emailInput.addEventListener("input", function () {
+        if (emailInput.checkValidity()) emailError.classList.remove("show");
+      });
+
+      // ---------- Cinematic 3D background (same as About page) ----------
+      (function () {
+        if (typeof THREE === "undefined") return;
+        const canvas = document.getElementById("bg-canvas");
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+          60,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          1000,
+        );
+        camera.position.z = 60;
+        const renderer = new THREE.WebGLRenderer({
+          canvas: canvas,
+          alpha: true,
+          antialias: true,
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        const particleCount = window.innerWidth < 700 ? 500 : 1200;
+        const positions = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i++) {
+          positions[i * 3] = (Math.random() - 0.5) * 240;
+          positions[i * 3 + 1] = (Math.random() - 0.5) * 240;
+          positions[i * 3 + 2] = (Math.random() - 0.5) * 240;
+        }
+        const particleGeo = new THREE.BufferGeometry();
+        particleGeo.setAttribute(
+          "position",
+          new THREE.BufferAttribute(positions, 3),
+        );
+        const particleMat = new THREE.PointsMaterial({
+          color: 0x22c55e,
+          size: 0.5,
+          transparent: true,
+          opacity: 0.35,
+        });
+        const particles = new THREE.Points(particleGeo, particleMat);
+        scene.add(particles);
+
+        const geo = new THREE.IcosahedronGeometry(16, 1);
+        const mat = new THREE.MeshBasicMaterial({
+          color: 0x22c55e,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.18,
+        });
+        const icosahedron = new THREE.Mesh(geo, mat);
+        icosahedron.position.set(20, 0, -20);
+        scene.add(icosahedron);
+
+        let mouseX = 0,
+          mouseY = 0;
+        window.addEventListener("mousemove", function (e) {
+          mouseX = e.clientX / window.innerWidth - 0.5;
+          mouseY = e.clientY / window.innerHeight - 0.5;
+        });
+        let scrollY = 0;
+        window.addEventListener("scroll", function () {
+          scrollY = window.scrollY;
+        });
+        window.addEventListener("resize", function () {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        function animate() {
+          requestAnimationFrame(animate);
+          if (!reduceMotion) {
+            particles.rotation.y += 0.0006;
+            particles.rotation.x += 0.0002;
+            icosahedron.rotation.x += 0.0018;
+            icosahedron.rotation.y += 0.0024;
+            camera.position.x += (mouseX * 8 - camera.position.x) * 0.03;
+            camera.position.y += (-mouseY * 8 - camera.position.y) * 0.03;
+            camera.position.z = 60 - scrollY * 0.02;
+            camera.lookAt(scene.position);
+          }
+          renderer.render(scene, camera);
+        }
+        animate();
+      })();
+    </script>
+  </body>
+</html>
